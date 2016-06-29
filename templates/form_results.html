@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Is my password cracked?</title>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div id="container">
+			<div id="results">
+				<h1>Results:</h1><br>
+				{{rockyou_output}}<br>
+				{{linkedin_output}}
+			</div>
+            <div class="title">
+                <h1>Password Cracked? Check below.</h1><br>
+				Checks to see if password is in Rockyou or Linkedin dumps.
+            </div>
+            <div id="content">
+                <form method="post" action="{{ url_for('lookup_password') }}">
+                  <label for="yourname">Enter password to lookup</label>
+                  <input type="password" name="user_password" /><br />
+                  <input type="submit" />
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
