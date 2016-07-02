@@ -1,26 +1,41 @@
-<html>
-    <head>
-        <title>Is my password cracked?</title>
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
-        <div id="container">
-			<div id="results">
-				<h1>Results:</h1><br>
-				{{rockyou_output}}<br>
-				{{linkedin_output}}
-			</div>
-            <div class="title">
-                <h1>Password Cracked? Check below.</h1><br>
-				Checks to see if password is in Rockyou or Linkedin dumps.
-            </div>
-            <div id="content">
-                <form method="post" action="{{ url_for('lookup_password') }}">
-                  <label for="yourname">Enter password to lookup</label>
-                  <input type="password" name="user_password" /><br />
-                  <input type="submit" />
-                </form>
-            </div>
-        </div>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pliancy - Check My Password - Results</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/colors.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<br>
+<div class="container text-center">
+    <div class="jumbotron bg-1">
+        <img src="/static/login_logo_lg.jpg" class="img-rounded"/>
+        <h1>Check My Password - Results</h1>
+        <table class="table text-left">
+            <thead>
+            <tr>
+                <th>Database</th>
+                <th>Result</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Rockyou</td>
+                <td>{{rockyou_output}}</td>
+            </tr>
+            <tr>
+                <td>Linkedin</td>
+                <td>{{linkedin_output}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="/" role="button" class="btn btn-primary btn-block">Return</a>
+    </div>
+</div>
+</body>
 </html>

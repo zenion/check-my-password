@@ -1,5 +1,5 @@
 import sys, hashlib, logging
-from flask import Flask, request, url_for, render_template
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -12,26 +12,28 @@ with open('static/linkedin_hashes.txt', 'r', encoding="latin-1") as f:
 
 def lookup_rockyou(password):
     if password in rockyou_content:
-        return "Rockyou: FOUND."
-    return "Rockyou: NOT FOUND."
+        return "FOUND"
+    return "NOT FOUND"
+
 
 def lookup_linkedin(password):
     hexed_password = hashlib.sha1(password.encode('utf-8')).hexdigest()
     hexed_password_short = '00000' + hexed_password[5:]
     response = []
     if hexed_password in linkedin_content:
-        response.append("Linkedin Dump: FOUND.")
+        response.append("FOUND ")
     if hexed_password_short in linkedin_content:
-        response.append("Linkedin Dump: FOUND and CRACKED.")
+        response.append("FOUND and CRACKED")
     if response:
         return response
     else:
-        return "Linkedin Dump: NOT FOUND."
+        return "NOT FOUND"
 
 
 @app.route('/')
 def form():
     return render_template('form.html')
+
 
 @app.route('/lookup_password', methods=['POST'])
 def lookup_password():
@@ -44,6 +46,7 @@ def lookup_password():
             linkedin_output_string += str(i + ' ')
     else:
         linkedin_output_string = linkedin_output
+
     return render_template('form_results.html', rockyou_output=rockyou_output, linkedin_output=linkedin_output_string)
 
 
